@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 5854665689197024253}
   - component: {fileID: 5854665689197024255}
   - component: {fileID: 5854665689197024252}
+  - component: {fileID: 3950178926177910781}
   m_Layer: 5
   m_Name: Answer_Panel
   m_TagString: Untagged
@@ -200,3 +201,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3950178926177910781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5854665689197024130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f62d6c9f53dab5540a97a26172b9028b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

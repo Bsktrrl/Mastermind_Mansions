@@ -32,6 +32,10 @@ public class BoxButton : MonoBehaviour
         backgroundSprite = backgroundGO.GetComponent<Image>().sprite;
         backgroundColor = backgroundGO.GetComponent<Image>().color;
     }
+    private void Update()
+    {
+        DestroyObject();
+    }
 
 
     //--------------------
@@ -54,6 +58,14 @@ public class BoxButton : MonoBehaviour
 
                 return;
             }
+        }
+    }
+
+    void DestroyObject()
+    {
+        if (sceneManager.destroyBO)
+        {
+            Destroy(this.gameObject);
         }
     }
 }

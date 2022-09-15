@@ -89,6 +89,9 @@ public class SceneManager : MonoBehaviour
 
     int guessCounter;
 
+    public bool destroyBO;
+    bool mode;
+
 
 
     //--------------------
@@ -122,19 +125,63 @@ public class SceneManager : MonoBehaviour
 
     void SetupLists()
     {
+        int modeSelect = Random.Range(0, 2);
+
+        switch (modeSelect)
+        {
+            case 0:
+                mode = true;
+                break;
+            case 1:
+                mode = false;
+                break;
+            default:
+                mode = true;
+                break;
+        }
+
+        //if (modeSelect >= 0.5)
+        //{
+        //    mode = false;
+        //}
+        //else
+        //{
+        //    mode = true;
+        //}
+
         //Add Sprites to list
-        Choice_Sprite_List.Add(Choice_nr_Green);
-        Choice_Sprite_List.Add(Choice_nr_Blue);
-        Choice_Sprite_List.Add(Choice_nr_Yellow);
-        Choice_Sprite_List.Add(Choice_nr_Red);
-        Choice_Sprite_List.Add(Choice_nr_White);
-        Choice_Sprite_List.Add(Choice_nr_Purple);
+        if (mode)
+        {
+            Choice_Sprite_List.Add(Choice_nr_Green);
+            Choice_Sprite_List.Add(Choice_nr_Blue);
+            Choice_Sprite_List.Add(Choice_nr_Yellow);
+            Choice_Sprite_List.Add(Choice_nr_Red);
+            Choice_Sprite_List.Add(Choice_nr_White);
+            Choice_Sprite_List.Add(Choice_nr_Purple);
+        }
+        else
+        {
+            Choice_Sprite_List.Add(Choice_nr_1);
+            Choice_Sprite_List.Add(Choice_nr_2);
+            Choice_Sprite_List.Add(Choice_nr_3);
+            Choice_Sprite_List.Add(Choice_nr_4);
+            Choice_Sprite_List.Add(Choice_nr_5);
+        }
     }
 
     void SetParameters()
     {
-        choices_Amount = Random.Range(3, 7);
-        box_Amount = Random.Range(3, 7);
+        if (mode)
+        {
+            choices_Amount = Random.Range(3, 7);
+            box_Amount = Random.Range(3, 7);
+        }
+        else
+        {
+            choices_Amount = Random.Range(3, 6);
+            box_Amount = Random.Range(3, 6);
+        }
+        
     }
     void SetGoal()
     {
@@ -426,8 +473,88 @@ public class SceneManager : MonoBehaviour
 
     public void ResetLevel()
     {
-        if (pause == true) { return; }
+        //if (pause == true) { return; }
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+        int tempRemover = 0;
+
+        #region Remove Lists
+        tempRemover = Choice_Sprite_List.Count;
+        for (int i = 0; i < tempRemover; i++)
+        {
+            Choice_Sprite_List.Remove(Choice_Sprite_List[0]);
+        }
+
+        tempRemover = goal.Count;
+        for (int i = 0; i < tempRemover; i++)
+        {
+            goal.Remove(goal[0]);
+        }
+
+        tempRemover = Choice_List.Count;
+        for (int i = 0; i < tempRemover; i++)
+        {
+            Choice_List.Remove(Choice_List[0]);
+        }
+
+        tempRemover = Box_Display_List.Count;
+        for (int i = 0; i < tempRemover; i++)
+        {
+            Box_Display_List.Remove(Box_Display_List[0]);
+        }
+
+        tempRemover = AnswerPanel_List.Count;
+        for (int i = 0; i < tempRemover; i++)
+        {
+            AnswerPanel_List.Remove(AnswerPanel_List[0]);
+        }
+
+        tempRemover = goalisTaken.Count;
+        for (int i = 0; i < tempRemover; i++)
+        {
+            goalisTaken.Remove(goalisTaken[0]);
+        }
+
+        tempRemover = BoxisTaken.Count;
+        for (int i = 0; i < tempRemover; i++)
+        {
+            BoxisTaken.Remove(BoxisTaken[0]);
+        }
+
+        tempRemover = Right_List.Count;
+        for (int i = 0; i < tempRemover; i++)
+        {
+            Right_List.Remove(Right_List[0]);
+        }
+
+        tempRemover = Left_List.Count;
+        for (int i = 0; i < tempRemover; i++)
+        {
+            Left_List.Remove(Left_List[0]);
+        }
+        #endregion
+
+        #region Remove GameObjects
+        destroyBO = true;
+
+        StartCoroutine(WaitReset(0.01f));
+        #endregion
+    }
+
+    IEnumerator WaitReset(float second)
+    {
+        yield return new WaitForSecondsRealtime(second);
+
+        destroyBO = false;
+
+        //Add New
+        SetupLists();
+
+        SetParameters();
+        SetGoal();
+
+        SetupChoiceList();
+        SetupBoxList();
+
+        SideScrollSize_Height = 0;
     }
 }

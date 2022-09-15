@@ -31,6 +31,10 @@ public class ChoicesButton_Clicked : MonoBehaviour
         thisSprite = thisGO.GetComponent<Image>().sprite;
         thisColor = thisGO.GetComponent<Image>().color;
     }
+    private void Update()
+    {
+        DestroyObject();
+    }
 
 
     //--------------------
@@ -59,5 +63,13 @@ public class ChoicesButton_Clicked : MonoBehaviour
     public Sprite GetChoiceSprite()
     {
         return thisSprite;
+    }
+
+    void DestroyObject()
+    {
+        if (sceneManager.destroyBO)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
