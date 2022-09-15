@@ -79,8 +79,9 @@ public class SceneManager : MonoBehaviour
     #region Texts
     [Header("Texts")]
     [SerializeField] TextMeshProUGUI GuessText;
+    [SerializeField] TextMeshProUGUI TotalGuessText;
     #endregion
-    
+
     int SideScrollSize_Width = 1180;
     int SideScrollSize_Height = 0;
 
@@ -88,6 +89,7 @@ public class SceneManager : MonoBehaviour
     bool reset = true;
 
     int guessCounter;
+    int totalGuessCounter;
 
     public bool destroyBO;
     bool mode;
@@ -139,15 +141,6 @@ public class SceneManager : MonoBehaviour
                 mode = true;
                 break;
         }
-
-        //if (modeSelect >= 0.5)
-        //{
-        //    mode = false;
-        //}
-        //else
-        //{
-        //    mode = true;
-        //}
 
         //Add Sprites to list
         if (mode)
@@ -297,6 +290,7 @@ public class SceneManager : MonoBehaviour
     void UpdateTexts()
     {
         GuessText.text = "Guesses: " + guessCounter;
+        TotalGuessText.text = "Total Guesses: " + totalGuessCounter;
     }
 
 
@@ -311,6 +305,7 @@ public class SceneManager : MonoBehaviour
         if (CheckBoxesSelected(counter) >= Box_Display_List.Count)
         {
             guessCounter += 1;
+            totalGuessCounter += 1;
             int correctCounter = 0;
 
             //If Guessed Correctly
@@ -556,5 +551,6 @@ public class SceneManager : MonoBehaviour
         SetupBoxList();
 
         SideScrollSize_Height = 0;
+        guessCounter = 0;
     }
 }
