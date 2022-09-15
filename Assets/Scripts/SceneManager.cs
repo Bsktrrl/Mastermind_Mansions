@@ -80,6 +80,7 @@ public class SceneManager : MonoBehaviour
     [Header("Texts")]
     [SerializeField] TextMeshProUGUI GuessText;
     [SerializeField] TextMeshProUGUI TotalGuessText;
+    [SerializeField] TextMeshProUGUI TotalWins;
     #endregion
 
     int SideScrollSize_Width = 1180;
@@ -90,6 +91,7 @@ public class SceneManager : MonoBehaviour
 
     int guessCounter;
     int totalGuessCounter;
+    int winCounter;
 
     public bool destroyBO;
     bool mode;
@@ -119,6 +121,7 @@ public class SceneManager : MonoBehaviour
     private void Update()
     {
         UpdateTexts();
+        ExitEscapeButton();
     }
 
 
@@ -291,6 +294,7 @@ public class SceneManager : MonoBehaviour
     {
         GuessText.text = "Guesses: " + guessCounter;
         TotalGuessText.text = "Total Guesses: " + totalGuessCounter;
+        TotalWins.text = "Total Wins: " + winCounter;
     }
 
 
@@ -323,6 +327,17 @@ public class SceneManager : MonoBehaviour
             }
         }
     }
+    public void ExitButton_Clicked()
+    {
+        Application.Quit();
+    }
+    void ExitEscapeButton()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
 
     int CheckBoxesSelected(int counter)
     {
@@ -353,6 +368,8 @@ public class SceneManager : MonoBehaviour
 
     void CorrectGuess()
     {
+        winCounter += 1;
+
         audioEffects.PlayOneShot(audioManager.GetSuccessAudio(), 0.75f);
         print("Correct");
 
