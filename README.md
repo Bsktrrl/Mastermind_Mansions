@@ -11,7 +11,8 @@ This mini-game build upon the rules of the classical "Mastermind" where you make
 - A wrong guess leaves an empty space.<br>
 <br>
 <br>
-For this version, you spawn in new levels at random, swaping between symbols and numbers, and the array of slots to guess, as posbilities from "Mansions of Madness". You may spress the "Reset" button to change the level.
+For this version, you spawn in new levels at random, swapping between symbols and numbers, and the array of slots to guess, as possibilities from "Mansions of Madness". You may spress the "Reset" button to change the level.
+You may press the "Reset" button to change the level.
 <br>
 <br>
 <img src="https://github.com/Bsktrrl/Bsktrrl.github.io/blob/main/images/MasterMadness/Versions.gif" width="50%"/><br>
